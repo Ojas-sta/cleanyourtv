@@ -1,0 +1,36 @@
+# TCL T6C / G10 Google TV debloat list
+# Tuned for user preferences:
+# - Keeps all streaming apps (Netflix, Prime, YouTube, Apple TV, Hotstar, Spotify, F1 TV, etc.)
+# - Keeps Chromecast (mediashell), Voice Assistant / remote mic, Miracast/Airplay, and Firmware Updates
+# - Removes TCL ads, promo channels, retail store demos, e-manuals, and Samba TV ACR tracking
+
+# Viewing tracking and telemetry
+tv.samba.ssm.ui
+com.tcl.logkit
+com.tcl.interactive
+com.tcl.useragreement
+com.tcl.usercenter
+
+# TCL content rows, promo push, and FAST channels
+com.tcl.channelplus
+com.tcl.waterfall.overseas
+com.tcl.tv.tclhome_passive
+com.tcl.partnercustomizer
+com.tcl.smartalexa
+
+# Retail demo / store mode
+com.tcl.exhibit
+com.tcl.esticker
+com.tcl.hotelmenu
+com.tcl.initsetup
+
+# Unused preloaded manuals and background utilities
+com.tcl.ocean.instructions
+com.tcl.repairguide
+com.tcl.guard
+com.tcl.magiconnectfree
+com.tcl.UpdatePeripheral
+android.autoinstalls.config.google.gtvpai
+com.google.android.feedback
+com.google.android.marvin.talkback
+com.google.android.tungsten.setupwraith

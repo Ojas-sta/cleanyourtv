@@ -17,7 +17,7 @@
 
     <!-- Apps pinned to the dock row at the bottom, in this order. Missing apps are skipped. -->
     <string-array name="dock_apps">
-        <item>com.netflix.ninja</item>
+        <item>com.apple.atve.androidtv.appletv</item>
         <item>com.amazon.amazonvideo.livingroom</item>
         <item>com.google.android.youtube.tv</item>
         <item>in.startv.hotstar</item>
@@ -29,12 +29,12 @@
 
     <!-- Apps never shown as tiles (e.g. the Live TV app, which the Inputs menu already covers). -->
     <string-array name="hidden_apps">
-        <item>com.mediatek.wwtv.tvcenter</item>
+        <item>com.tcl.tv</item>
         <item>com.mitv.gallery</item>
     </string-array>
 
     <!-- The TV's Live TV / tuner app, offered at the end of the Inputs menu. Leave empty to omit. -->
-    <string name="live_tv_package" translatable="false">com.mediatek.wwtv.tvcenter</string>
+    <string name="live_tv_package" translatable="false">com.tcl.tv</string>
 
     <!-- Open the Live TV app above the first time Home comes up after the TV is switched on, for sets that are
          mostly used for broadcast TV. Once per boot: Home after that stays Home. Can also be set with
@@ -146,6 +146,9 @@
          a temporary `Log.d` in the helper's `onKeyEvent`: `getKeyCode()`, `getScanCode()`, `getDeviceId()`, read
          after a HOME_KEY_SERVICE=1 rebuild. Leave empty to omit. -->
     <integer-array name="settings_key_keycodes">
+        <item>83</item>
+        <item>4077</item>
+        <item>4020</item>
     </integer-array>
     <!-- What those Settings buttons open: false, the TV's Settings; true, a small glass panel at the top right
          with TV settings, Display, Network, Apps (re-enable an app) and Launcher settings, over whatever is on screen.
@@ -172,31 +175,12 @@
          get a chooser on every press. Also "handle_view_inputs": true in a theme's config.json. -->
     <bool name="handle_view_inputs">false</bool>
     <!-- Remote buttons that open an app, as "keycode:package" or "KEYCODE_NAME:package" (INPUT_KEY_SERVICE=1 or
-         HOME_KEY_SERVICE=1; both read this one list, and a theme's config.json can set it too). On Google TV the
-         YouTube button sends 190 (KEYCODE_BUTTON_3) to the stock launcher, so it does nothing once launcherx
-         is disabled (Chromecast with Google TV, Xiaomi MiTV-AXFR2): 190:com.google.android.youtube.tv brings
-         it back. The KTC LUMIO VISION remote (Realtek Google TV) sends Netflix 191, YouTube 190, Prime Video 195
-         and TL;DR 200. Some remotes send several app buttons as one keycode and tell them apart only by scancode
-         (Sony BRAVIA: YouTube, Prime Video and Disney+ are all keycode 196, scancodes 485, 490 and 491); list those
-         as "scan:scancode:package", e.g. scan:490:com.wbd.hbomax, found with `tools/tv.py 'getevent -lt'` (the
-         EV_KEY code, in hex). A scancode entry wins over a keycode. In place of a package, "input:<input id>"
-         switches to that TV input, e.g. scan:227:input:com.tcl.tvinput/.passthroughinput.TvPassThroughService/HW1413744640
-         for HDMI 3 on a TCL Smart TV Pro; the ids are in `tools/tv.py 'dumpsys tv_input'` (hdmi_port=N under
-         TvInputHardwareInfo). An action word in place of a package runs that action instead: back, home, recents,
-         mute (toggles the sound, with the TV's volume bar), sleep (standby, Android 9 and later), screensaver (the
-         one chosen in the TV's settings, or the launcher's clock), settings or wifi; e.g. KEYCODE_PROG_YELLOW:mute
-         and hold:KEYCODE_PROG_YELLOW:sleep. "package/.Activity" opens that activity instead of the app's launcher
-         entry, e.g. hold:191:io.github.maxhayim.brightness/.QuickActivity for an add-on's quick bar. Prefix an
-         entry with "hold:" for the same button's long press:
-         "hold:KEYCODE_BUTTON_8:org.xbmc.kodi" opens Kodi when held for half a second, while the unprefixed entry
-         still opens on a tap; "hold:scan:490:..." works for scancodes. A key with only a hold entry does nothing
-         on a tap. A listed app that is not installed leaves the button doing nothing. Prefix an entry with "front:"
-         for what a tap does while the button's own app is already in front (HOME_KEY_SERVICE=1), and use
-         "guide:<package>" as a target to open that Live TV app's program guide: "172:com.vt.tv.tvcenter" with
-         "front:172:guide:com.vt.tv.tvcenter" makes the Hisense hengshan Live TV button open Live TV, then its guide,
-         where the firmware hands KEYCODE_GUIDE (172) to the stock launcher and no app ever receives it. Leave empty
-         to omit. -->
+         HOME_KEY_SERVICE=1; both read this one list, and a theme's config.json can set it too). -->
     <string-array name="app_keys" translatable="false">
+        <item>4062:com.netflix.ninja</item>
+        <item>4065:com.google.android.youtube.tv</item>
+        <item>4099:com.amazon.amazonvideo.livingroom</item>
+        <item>4159:com.apple.atve.androidtv.appletv</item>
     </string-array>
 
     <!-- Package of the stock launcher, for TVs whose firmware turns it back on after it was disabled. XGIMI's
