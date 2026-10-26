@@ -1,25 +1,54 @@
 # Clean Your TV — Setup Summary for TCL T6C (Google TV 12)
 
-Your **TCL T6C** (G10 platform, Android 12) has been debloated and transformed into a clean, ad-free **Apple TV 4K** experience.
+Your **TCL T6C** (G10 platform, Android 12) has been debloated and transformed into a clean, ad-free **Apple TV 4K (tvOS 26)** experience.
 
 ---
 
-## 📸 Before & After
-
-| Before (Stock Google TV) | After (Apple TV Style) |
-|---|---|
-| Sponsored banners, recommendation rows, manufacturer promos, and clutter | Pitch-black home, 4-app rounded dock, dynamic top shelf with ambient glow, and quick frosted pills |
+## 📸 Live TV Verification Showcase
 
 Screenshots pulled directly from your TV are saved under [`shots/`](shots/):
-- `shots/00-initial.png`: Baseline stock Google TV
-- `shots/02-new-home.png`: New Apple TV style Home screen
-- `shots/03-focus-prime.png`: Prime Video focused with ambient glow
-- `shots/04-grid-apps.png`: App grid sliding up on D-pad Down
-- `shots/07-inputs-dropdown.png`: Compact glass Inputs switcher (HDMI 1, 2, 3, AV, Live TV)
+- `shots/20-apple-home.png`: Apple TV Home screen with Inter typography, 6-app liquid glass dock, and status pill controls
+- `shots/21-apple-focus.png`: Focus on Bell button with 3D elevation and specular shine
+- `shots/22-apple-clock-panel.png`: Interactive Clock capsule popup showing live seconds and full date in liquid glass
+- `shots/23-apple-settings.png`: Apple TV tvOS settings dropdown menu
+- `shots/24-apple-sounds.png`: Apple TV sound customization menu (nav ticks, app open pops)
+- `shots/28-apple-aerials-store.png`: Apple Aerial Screensaver store with direct Apple CDN download support
+- `shots/25-apple-dock-scroll.png`: Dock parking at top of screen with smooth vertical scroll into the app grid
+- `shots/00-initial.png`: Baseline stock Google TV before debloat
 
 ---
 
-## ⚡ What Was Done
+## 🍎 Apple TV (tvOS 26) Features Installed
+
+1. **Inter Typography Suite**:
+   - Replaces system fonts with Rasmus Andersson's Inter (`inter_regular`, `inter_medium`, `inter_bold`, `inter_display_light`, `inter_display_extralight`).
+   - "Good evening, [Date]" header and clock pill with proportional tabular numbers.
+
+2. **Liquid Glass Capsules & Panels**:
+   - Smoked liquid glass dock band holding 6 primary apps (**Apple TV**, **Prime Video**, **YouTube**, **JioHotstar**, **Games**, **BrowseHere**).
+   - Top action buttons: **Bell** (mute/unmute sounds with hold for menu), **Reorder** (instant tile reorganization), **Inputs** (HDMI/AV sources), **Settings** (tvOS glass dropdown), and **Clock** (capsule pill).
+
+3. **3D Focus Motion & Specular Shine**:
+   - Dynamic 3D tilt responding to remote D-pad direction.
+   - Elevation lift and drop shadow on focused items.
+   - Specular highlight shine sweep across focused buttons and tiles.
+
+4. **Interactive Clock & Seconds Panel**:
+   - Clicking the Clock capsule opens a liquid glass card displaying live seconds (`HH:mm:ss`) and full date.
+
+5. **Soft Audio Feedback**:
+   - tvOS `nav_tick` on D-pad navigation and `open_pop` on launching apps.
+   - Toggle audio on/off anytime using the Bell top button.
+
+6. **Apple Aerial Screensavers**:
+   - In-app store under **Settings → Background → Download aerials...** lets you stream/save 4K Apple aerial backdrops authenticated via Apple Root CA.
+
+7. **Dock Parking**:
+   - Scrolling down smoothly slides the dock band to the top of the screen where it locks into place while exploring the app grid.
+
+---
+
+## ⚡ What Was Done Under the Hood
 
 1. **Safety Backup**:
    - Saved full package lists, system properties, and Android settings under [`backup/`](backup/).
@@ -40,43 +69,20 @@ Screenshots pulled directly from your TV are saved under [`shots/`](shots/):
    - Miracast / Screen mirroring (`com.tcl.airplay2`, `com.tcl.miracast`)
    - System firmware updates (`com.tcl.ttvs`)
    - TV tuner & HDMI player (`com.tcl.tv`, `com.tcl.tvinput`)
-
-4. **Apple TV Launcher Installed**:
-   - Built native Android TV launcher (523 KB)
-   - Configured 4 dock apps: **Apple TV**, **Prime Video**, **YouTube**, **JioHotstar**
-   - Configured TCL BT_RC833 remote shortcuts:
-     - Netflix button -> Netflix
-     - YouTube button -> YouTube
-     - Prime Video button -> Prime Video
-     - Web button -> Apple TV
-     - Settings gear button -> TV Settings
+   - All TCL hardware bugfixes, CEC resolution, and vendor remote key mappings (Netflix, YouTube, Prime Video, Apple TV, Settings gear).
 
 ---
 
 ## 🛠️ Helpful Commands
 
-### 1. Re-enable Any App
-Everything was disabled via `pm disable-user --user 0`, so nothing was uninstalled. To re-enable any package:
+### 1. Download Apple Aerials from Your Mac
 ```bash
-tools/tv.py 'pm enable --user 0 <package_name>'
-```
-For example, to re-enable TalkBack:
-```bash
-tools/tv.py 'pm enable --user 0 com.google.android.marvin.talkback'
+cd /Users/roopalisingh/.gemini/antigravity/scratch/cleanyourtv
+TV_HOST=169.254.183.189 .venv/bin/python tools/aerials.py --list
+TV_HOST=169.254.183.189 .venv/bin/python tools/aerials.py --download "north_america_aurora.mov"
 ```
 
-### 2. Change Dock Order or Apps
-To change the apps in the dock or reorder them:
-1. Open [`launcher/app/src/main/res/values/config.xml`](launcher/app/src/main/res/values/config.xml).
-2. Edit the `<string-array name="dock_apps">` section.
-3. Run:
-```bash
-./build_and_install_my_tv.sh
-```
-
-Alternatively, you can also reorder apps directly on the TV screen by holding the **OK** button on any tile and choosing **Move**.
-
-### 3. Switch Themes or Wallpapers
+### 2. Switch Themes or Wallpapers
 The launcher supports instant themes from [`themes/`](themes/) without rebuilding:
 ```bash
 # Dark navy with soft teal/violet ambient glow:
@@ -92,7 +98,19 @@ tools/theme.sh themes/scenes
 tools/theme.sh --reset
 ```
 
-### 4. One-Click Restore to Stock Google TV
+### 3. Re-enable Any App
+Everything was disabled via `pm disable-user --user 0`, so nothing was uninstalled. To re-enable any package:
+```bash
+tools/tv.py 'pm enable --user 0 <package_name>'
+```
+
+### 4. Rebuild & Reinstall Launcher
+If you edit [`config.xml`](launcher/app/src/main/res/values/config.xml):
+```bash
+./build_and_install_my_tv.sh
+```
+
+### 5. One-Click Restore to Stock Google TV
 If you ever want to completely undo all changes and return to the original Google TV home screen:
 ```bash
 ./restore_my_tv.sh
