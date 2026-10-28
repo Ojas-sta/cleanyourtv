@@ -6,15 +6,15 @@ Your **TCL T6C** (G10 platform, Android 12) has been debloated and transformed i
 
 ## 📸 Live TV Verification Showcase
 
-Screenshots pulled directly from your TV are saved under [`shots/`](shots/):
-- `shots/20-apple-home.png`: Apple TV Home screen with Inter typography, 6-app liquid glass dock, and status pill controls
-- `shots/21-apple-focus.png`: Focus on Bell button with 3D elevation and specular shine
-- `shots/22-apple-clock-panel.png`: Interactive Clock capsule popup showing live seconds and full date in liquid glass
-- `shots/23-apple-settings.png`: Apple TV tvOS settings dropdown menu
-- `shots/24-apple-sounds.png`: Apple TV sound customization menu (nav ticks, app open pops)
-- `shots/28-apple-aerials-store.png`: Apple Aerial Screensaver store with direct Apple CDN download support
-- `shots/25-apple-dock-scroll.png`: Dock parking at top of screen with smooth vertical scroll into the app grid
-- `shots/00-initial.png`: Baseline stock Google TV before debloat
+Screenshots pulled directly from your TV are saved under [`docs/apple-tv/`](docs/apple-tv/):
+- `docs/apple-tv/20-apple-home.png`: Apple TV Home screen with Inter typography, 6-app liquid glass dock, and status pill controls
+- `docs/apple-tv/21-apple-focus.png`: Focus on Bell button with 3D elevation and specular shine
+- `docs/apple-tv/22-apple-clock-panel.png`: Interactive Clock capsule popup showing live seconds and full date in liquid glass
+- `docs/apple-tv/23-apple-settings.png`: Apple TV tvOS settings dropdown menu
+- `docs/apple-tv/24-apple-sounds.png`: Apple TV sound customization menu (nav ticks, app open pops)
+- `docs/apple-tv/28-apple-aerials-store.png`: Apple Aerial Screensaver store with direct Apple CDN download support
+- `docs/apple-tv/25-apple-dock-scroll.png`: Dock parking at top of screen with smooth vertical scroll into the app grid
+- `docs/apple-tv/00-initial.png`: Baseline stock Google TV before debloat
 
 ---
 
